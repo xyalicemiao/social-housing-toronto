@@ -1,5 +1,5 @@
 ---
-title: "Social Housing in Toronto: Investigating Status"
+title: "Social Housing in Toronto: Investigating Status from Waiting Lists and Their Social Implications"
 subtitle: "My subtitle if needed"
 author: 
   - First author
@@ -130,15 +130,37 @@ Moreover, an analysis of the waiting list composition reveals critical insights 
 #| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
 #| warning: false
 
-modelsummary::modelsummary(
-  list(
-    "First model" = first_model
-  ),
-  statistic = "mad",
-  fmt = 2
-)
-```
+# Load required packages
+library(ggplot2)
 
+# Extract relevant columns with adjusted column names
+quarter/year <- raw_data$Quarter/Year
+total_active <- raw_data$Total_active_waiting_list
+seniors <- raw_data$Seniors
+
+# Create a data frame
+plot_data <- data.frame(Quarter/Year = quarter/year,
+                        Total_active_waiting_list = total_active,
+                        Seniors = seniors)
+
+# Convert Quarter/Year to factor to maintain order
+plot_data$Quarter/Year <- factor(plot_data$Quarter/Year, levels = unique(plot_data$Year/Quarter))
+
+# Create a line plot
+ggplot(plot_data, aes(x = Quarter_Year)) +
+  geom_line(aes(y = Total_Active_Waiting_List, color = "Total Active Applications"), size = 1.2) +
+  geom_line(aes(y = Seniors, color = "Seniors' Applications"), linetype = "dashed", size = 1.2) +
+  scale_color_manual(values = c("blue", "red")) +
+  labs(title = "Total Active Applications vs. Seniors' Applications",
+       x = "Quarter Year",
+       y = "Application Numbers") +
+  theme_minimal() +
+  theme(legend.title = element_blank())
+
+```
+The line plot comparing total active applications to seniors' applications from Q1 2019 to Q4 2023 provides valuable insights into the demographics of individuals seeking social housing assistance and the overall trends in application numbers over time. From the graph, it is evident that both total active applications and seniors' applications exhibit fluctuations throughout the observed period. However, seniors' applications appear to comprise a relatively smaller proportion of the total active applications, as indicated by the consistently lower values for seniors' applications compared to total active applications. This disparity suggests that while seniors constitute a significant demographic group in need of social housing support, they may not represent the majority of applicants. Understanding this dynamic is crucial for policymakers and housing providers to tailor their strategies and resources effectively to address the diverse needs of applicants across different age groups.
+
+Moreover, the fluctuating trends in both total active applications and seniors' applications highlight the dynamic nature of housing demand and the complex socio-economic factors influencing individuals' housing situations. Further analysis may be warranted to explore the underlying reasons behind these fluctuations, such as changes in demographic trends, economic conditions, or shifts in housing policies and programs. Overall, this graph underscores the importance of considering demographic diversity and changing trends in social housing applications when developing and implementing policies and programs aimed at addressing housing needs and promoting housing equity for all segments of the population.
 
 
 
@@ -148,6 +170,10 @@ modelsummary::modelsummary(
 The observed dynamics in social housing demand and supply, as evidenced by the fluctuating patterns in application rates and the persistent gap between new entries and households housed, underscore the complex interplay of socio-economic factors influencing housing access and affordability. Research by Desmond and Kimbro (2015) highlights the intricate relationship between housing instability and poverty, wherein marginalized communities often face challenges in accessing stable and affordable housing options. Moreover, studies by Fitzpatrick et al. (2019) emphasize the role of structural inequalities and systemic barriers in perpetuating housing disparities, particularly among vulnerable populations such as seniors and single individuals. The phenomenon of fluctuating waiting list trends and demographic compositions may be attributed to various factors, including inadequate affordable housing stock, rising housing costs, and limited access to supportive services and resources. Additionally, the complexities of managing waiting lists and addressing changing applicant circumstances further contribute to the observed variations in social housing demand. Effective policy interventions aimed at addressing housing inequities and enhancing housing affordability are crucial in mitigating these challenges and ensuring equitable access to housing for all members of society (Desmond & Kimbro, 2015; Fitzpatrick et al., 2019).
 
 ## Second discussion point
+
+The visualization of total active applications versus seniors' applications from Q1 2019 to Q4 2023 sheds light on the significant representation of seniors within the social housing applicant pool. The observation that seniors comprise at least one-third of the total applications underscores the pronounced housing needs among older adults within the community. Research by Morrow-Howell et al. (2016) emphasizes the growing demographic shift towards an aging population and the subsequent implications for housing demand, particularly among low-income seniors. Furthermore, studies by Burholt and Windle (2006) highlight the multifaceted challenges faced by older adults in accessing suitable housing options, including financial constraints, physical health limitations, and social isolation. The substantial presence of seniors within the applicant pool suggests a pressing need for targeted interventions and policy measures to address the unique housing needs of this vulnerable demographic group (Morrow-Howell et al., 2016; Burholt & Windle, 2006).
+
+Moreover, the high proportion of seniors' applications relative to the total applicant pool underscores the importance of incorporating age-specific considerations into housing policy and program development. Research by Butler and Robison (2001) emphasizes the significance of age-in-place initiatives and supportive housing models tailored to the needs of older adults, facilitating aging in community settings and promoting independence and well-being. Additionally, studies by Gonyea et al. (2017) highlight the benefits of integrated housing and service programs for seniors, addressing both housing and health-related needs and enhancing overall quality of life. The findings from the visualization underscore the imperative for comprehensive housing strategies that prioritize the housing security and dignity of seniors while addressing broader societal challenges related to aging and housing inequities (Butler & Robison, 2001; Gonyea et al., 2017).
 
 ## Third discussion point
 
