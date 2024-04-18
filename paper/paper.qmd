@@ -1,9 +1,8 @@
 ---
-title: "Social Housing in Toronto: Investigating Status from Waiting Lists and Their Social Implications"
-subtitle: "My subtitle if needed"
+title: "Social Housing in Toronto"
+subtitle: "Investigating Status from Waiting Lists and Their Social Implications"
 author: 
-  - First author
-  - Another author
+  - Xiaoyu (Alice) Miao
 thanks: "Code and data are available at: LINK."
 date: today
 date-format: long
@@ -25,15 +24,19 @@ library(palmerpenguins)
 
 # Introduction
 
-You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
+Access to stable and affordable housing is a fundamental aspect of societal well-being, yet disparities persist in housing outcomes across different demographic groups. This paper investigates the dynamics of household composition in social housing applications in Toronto and its implications for housing policy and practice. Analyzing social housing application data from Q1 2019 to Q4 2023 within Toronto's housing landscape, the study focuses on the patterns and fluctuations in households applying for housing assistance, particularly those with and without dependents. The analysis highlights the diverse challenges faced by families in accessing stable and affordable housing in Toronto, emphasizing the dynamic nature of family dynamics and economic circumstances over time.
 
-The remainder of this paper is structured as follows. @sec-data....
-
+By recognizing the unique needs of households with dependents and understanding the socio-economic drivers of housing disparities in Toronto, policymakers and housing providers can develop targeted interventions to promote housing equity and stability for vulnerable families in the city. Through evidence-based policy interventions and a deeper understanding of household composition in social housing, this paper aims to contribute to the ongoing discourse on housing affordability, access, and equity in Toronto, striving towards inclusive and sustainable housing solutions for all members of Toronto's diverse community.
 
 
 # Data {#sec-data}
 
 Some of our data is of penguins (@fig-bills), from @palmerpenguins.
+
+Data Sourcing
+
+Data is sourced from Open Data Toronto.
+
 
 ```{r}
 #| label: fig-bills
@@ -70,8 +73,7 @@ analysis_data |>
        y = "Wing length (mm)")
 ```
 
-Talk way more about it. 
-
+The maps of Toronto showing where those social housing are spread gives the reader a more specific sense of what they look like in Toronto.
 
 
 
@@ -162,6 +164,47 @@ The line plot comparing total active applications to seniors' applications from 
 
 Moreover, the fluctuating trends in both total active applications and seniors' applications highlight the dynamic nature of housing demand and the complex socio-economic factors influencing individuals' housing situations. Further analysis may be warranted to explore the underlying reasons behind these fluctuations, such as changes in demographic trends, economic conditions, or shifts in housing policies and programs. Overall, this graph underscores the importance of considering demographic diversity and changing trends in social housing applications when developing and implementing policies and programs aimed at addressing housing needs and promoting housing equity for all segments of the population.
 
+```{r}
+#| echo: false
+#| eval: true
+#| warning: false
+#| message: false
+
+# Load required packages
+library(ggplot2)
+
+# Assuming your dataset is loaded into a variable named 'raw_data'
+# Extract relevant columns with adjusted column names
+year_quarter <- raw_data$Quarter_Year
+household_no_dependents <- raw_data$Household_no_dependents
+household_with_dependents <- raw_data$Household_with_dependents
+
+# Create a data frame
+plot_data <- data.frame(Year_Quarter = year_quarter,
+                        Household_no_dependents = household_no_dependents,
+                        Household_with_dependents = household_with_dependents)
+
+# Convert Year_Quarter to factor to maintain order
+plot_data$Year_Quarter <- factor(plot_data$Year_Quarter, levels = unique(plot_data$Year_Quarter))
+
+# Create a line plot
+ggplot(plot_data, aes(x = Year_Quarter)) +
+  geom_line(aes(y = Household_no_dependents, color = "Household without Dependents"), size = 1.2) +
+  geom_line(aes(y = Household_with_dependents, color = "Household with Dependents"), linetype = "dashed", size = 1.2) +
+  scale_color_manual(values = c("blue", "red")) +
+  labs(title = "Households with and without Dependents Applying for Social Housing",
+       x = "Year Quarter",
+       y = "Application Numbers") +
+  theme_minimal() +
+  theme(legend.title = element_blank())
+
+```
+
+The line plot comparing households with and without dependents applying for social housing from Q1 2019 to Q4 2023 provides valuable insights into the composition of applicants and potential variations in housing needs among different household types over time. From the graph, we observe fluctuations in both the number of households with and without dependents applying for social housing throughout the observed period. Interestingly, the number of households with dependents appears to fluctuate more prominently compared to households without dependents, as indicated by the greater variability in the dashed line representing households with dependents.
+
+This variation in the number of applications from households with dependents may reflect changes in family dynamics, economic conditions, or social factors affecting household composition and housing stability. For instance, economic downturns or changes in family circumstances could lead to fluctuations in the number of households with dependents seeking social housing support. Understanding these dynamics is crucial for policymakers and housing providers to tailor their programs and services effectively to meet the diverse needs of households with different compositions. It highlights the importance of considering family size, structure, and specific needs when designing housing assistance programs and allocating resources to address housing insecurity and promote housing stability for vulnerable populations.
+
+Moreover, further analysis of the underlying factors driving fluctuations in applications from households with and without dependents may provide valuable insights into broader socio-economic trends and challenges affecting housing affordability, access, and stability for families in need. Such insights can inform evidence-based policy interventions and targeted strategies aimed at addressing housing disparities and promoting equitable access to affordable and suitable housing for all households, regardless of their composition.
 
 
 # Discussion
@@ -176,6 +219,13 @@ The visualization of total active applications versus seniors' applications from
 Moreover, the high proportion of seniors' applications relative to the total applicant pool underscores the importance of incorporating age-specific considerations into housing policy and program development. Research by Butler and Robison (2001) emphasizes the significance of age-in-place initiatives and supportive housing models tailored to the needs of older adults, facilitating aging in community settings and promoting independence and well-being. Additionally, studies by Gonyea et al. (2017) highlight the benefits of integrated housing and service programs for seniors, addressing both housing and health-related needs and enhancing overall quality of life. The findings from the visualization underscore the imperative for comprehensive housing strategies that prioritize the housing security and dignity of seniors while addressing broader societal challenges related to aging and housing inequities (Butler & Robison, 2001; Gonyea et al., 2017).
 
 ## Third discussion point
+
+The analysis of the line plot comparing households with and without dependents applying for social housing sheds light on the complex interplay of socio-economic factors influencing housing needs and family structures. The observed fluctuations in applications from households with dependents suggest dynamic changes in family dynamics and economic circumstances over time. Research by Clampet-Lundquist et al. (2011) emphasizes the importance of considering household composition in housing policy and interventions, as households with dependents often face unique challenges in accessing stable and affordable housing. For instance, fluctuations in applications from households with dependents may reflect changes in employment opportunities, income levels, or housing affordability, which impact family decision-making regarding housing choices and stability.
+
+Moreover, studies by Murdie and Teixeira (2019) highlight the role of socio-economic factors and policy interventions in shaping housing outcomes for families, particularly those with children. The greater variability observed in applications from households with dependents compared to those without dependents underscores the diverse and evolving needs of families in the social housing system. Understanding these dynamics is essential for policymakers and housing providers to develop targeted interventions and support services that address the specific needs of families with dependents and promote housing equity for all members of society.
+
+In summary, the analysis of household compositions in social housing applications offers valuable insights into the nuanced challenges and vulnerabilities faced by families in accessing stable and affordable housing. By recognizing the unique needs of households with dependents and implementing evidence-based policy interventions, policymakers can work towards reducing housing disparities and promoting housing stability for vulnerable families in need (Clampet-Lundquist et al., 2011; Murdie & Teixeira, 2019).
+
 
 ## Weaknesses and next steps
 
