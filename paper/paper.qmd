@@ -1,5 +1,5 @@
 ---
-title: "My title"
+title: "Social Housing in Toronto: Investigating Status"
 subtitle: "My subtitle if needed"
 author: 
   - First author
@@ -74,38 +74,13 @@ Talk way more about it.
 
 
 
-# Model
-
-The goal of our modelling strategy is twofold. Firstly,...
-
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
-
-## Model set-up
-
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
-
-\begin{align} 
-y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
-\alpha &\sim \mbox{Normal}(0, 2.5) \\
-\beta &\sim \mbox{Normal}(0, 2.5) \\
-\gamma &\sim \mbox{Normal}(0, 2.5) \\
-\sigma &\sim \mbox{Exponential}(1)
-\end{align}
-
-We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
-
-
-### Model justification
-
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
 
 
 # Results
 
-Our results are summarized in @tbl-modelresults.
+
+The dataset "Centralized Waitlist for Social Housing" provides detailed information on the activities related to the social housing waitlist in Toronto for various quarters starting from Q1 2019. It includes data on new/reactivated applications, the number of households housed, inactive/cancelled applications, and the total active waiting list. Additionally, it breaks down the waiting list by household type (e.g., no dependents, with dependents, seniors).
+
 
 ```{r}
 #| echo: false
@@ -113,11 +88,40 @@ Our results are summarized in @tbl-modelresults.
 #| warning: false
 #| message: false
 
-library(rstanarm)
+# Load required packages
+library(ggplot2)
 
-first_model <-
-  readRDS(file = here::here("models/first_model.rds"))
+# Extract relevant columns with adjusted column names
+year_quarter <- raw_data$Quarter_Year
+new_reactivated_applications <- raw_data$New_reactivated
+housed <- raw_data$Housed
+
+# Create a data frame
+plot_data <- data.frame(Year_Quarter = year_quarter,
+                        New_Reactivated_Applications = new_reactivated_applications,
+                        Housed = housed)
+
+# Convert Year_Quarter to factor to maintain order
+plot_data$Year_Quarter <- factor(plot_data$Year_Quarter, levels = unique(plot_data$Year_Quarter))
+
+# Create a line plot
+ggplot(plot_data, aes(x = Year_Quarter)) +
+  geom_line(aes(y = New_Reactivated_Applications, color = "New/Reactivated Applications"), size = 1.2) +
+  geom_line(aes(y = Housed, color = "Housed"), linetype = "dashed", size = 1.2) +
+  scale_color_manual(values = c("blue", "red")) +
+  labs(title = "Yearly New/Reactivated Applications vs. Housed",
+       x = "Year Quarter",
+       y = "Application Status") +
+  theme_minimal() +
+  theme(legend.title = element_blank())
+
 ```
+The line graph illustrates the dynamic interplay between demand and supply within Toronto's social housing sector from Q1 2019 to Q4 2023. The data exhibits fluctuating patterns in new or reactivated social housing applications across different quarters, with a notable surge observed in Q1 2020. Despite these fluctuations, the number of households housed each quarter consistently lags behind new entries, underscoring a substantial gap between demand and supply dynamics. This persistent shortfall indicates the ongoing challenge of meeting the housing needs of vulnerable populations within the community.
+
+Examining waiting list trends further illuminates the complexities involved in managing social housing demand. The total active waiting list experiences fluctuations, notably declining in Q2 2019 due to a significant number of inactive or cancelled applications. This fluctuation suggests challenges in maintaining accurate waiting lists or changes in applicants' circumstances, highlighting the multifaceted nature of addressing social housing needs. Such insights underscore the importance of robust data management and adaptive policies to effectively respond to evolving housing demands.
+
+Moreover, an analysis of the waiting list composition reveals critical insights into the demographics of those in need of social housing. A significant portion of seniors and households without dependents feature prominently in the waiting list, indicating a pressing need for housing support among these vulnerable groups. This demographic composition underscores broader social and economic challenges, including affordability issues for seniors and single individuals, necessitating targeted interventions and policy measures to address housing inequities and ensure inclusive access to adequate housing for all segments of the population.
+
 
 ```{r}
 #| echo: false
@@ -141,8 +145,7 @@ modelsummary::modelsummary(
 # Discussion
 
 ## First discussion point {#sec-first-point}
-
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+The observed dynamics in social housing demand and supply, as evidenced by the fluctuating patterns in application rates and the persistent gap between new entries and households housed, underscore the complex interplay of socio-economic factors influencing housing access and affordability. Research by Desmond and Kimbro (2015) highlights the intricate relationship between housing instability and poverty, wherein marginalized communities often face challenges in accessing stable and affordable housing options. Moreover, studies by Fitzpatrick et al. (2019) emphasize the role of structural inequalities and systemic barriers in perpetuating housing disparities, particularly among vulnerable populations such as seniors and single individuals. The phenomenon of fluctuating waiting list trends and demographic compositions may be attributed to various factors, including inadequate affordable housing stock, rising housing costs, and limited access to supportive services and resources. Additionally, the complexities of managing waiting lists and addressing changing applicant circumstances further contribute to the observed variations in social housing demand. Effective policy interventions aimed at addressing housing inequities and enhancing housing affordability are crucial in mitigating these challenges and ensuring equitable access to housing for all members of society (Desmond & Kimbro, 2015; Fitzpatrick et al., 2019).
 
 ## Second discussion point
 
