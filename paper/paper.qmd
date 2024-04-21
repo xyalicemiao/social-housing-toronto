@@ -123,7 +123,7 @@ ggplot(plot_data,
   theme(legend.title = element_blank())
 
 ```
-The dot graph illustrates the dynamic interplay between demand and supply within Toronto's social housing sector from Q1 2019 to Q4 2023. The data exhibits fluctuating patterns in new or reactivated social housing applications across different quarters, with a notable surge observed in Q1 2020. Despite these fluctuations, the number of households housed each quarter consistently lags behind new entries, underscoring a substantial gap between demand and supply dynamics. This persistent shortfall indicates the ongoing challenge of meeting the housing needs of vulnerable populations within the community.
+The dot graph @figure1 illustrates the dynamic interplay between demand and supply within Toronto's social housing sector from Q1 2019 to Q4 2023. The data exhibits fluctuating patterns in new or reactivated social housing applications across different quarters, with a notable surge observed in Q1 2020. Despite these fluctuations, the number of households housed each quarter consistently lags behind new entries, underscoring a substantial gap between demand and supply dynamics. This persistent shortfall indicates the ongoing challenge of meeting the housing needs of vulnerable populations within the community.
 
 Examining waiting list trends further illuminates the complexities involved in managing social housing demand. The total active waiting list experiences fluctuations, notably declining in Q2 2019 due to a significant number of inactive or cancelled applications. This fluctuation suggests challenges in maintaining accurate waiting lists or changes in applicants' circumstances, highlighting the multifaceted nature of addressing social housing needs. Such insights underscore the importance of robust data management and adaptive policies to effectively respond to evolving housing demands.
 
@@ -135,9 +135,8 @@ Moreover, an analysis of the waiting list composition reveals critical insights 
 ```{r}
 #| echo: false
 #| eval: true
-#| label: tbl-modelresults
-#| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
 #| warning: false
+#| message: false
 
 # Load required packages
 library(ggplot2)
@@ -170,7 +169,7 @@ ggplot(plot_data, aes(x = quarter_year)) +
   theme(legend.title = element_blank())
 
 ```
-The dot plot comparing total active applications to seniors' applications from Q1 2019 to Q4 2023 provides valuable insights into the demographics of individuals seeking social housing assistance and the overall trends in application numbers over time. From the graph, it is evident that both total active applications and seniors' applications exhibit fluctuations throughout the observed period. However, seniors' applications appear to comprise a relatively smaller proportion of the total active applications, as indicated by the consistently lower values for seniors' applications compared to total active applications. This disparity suggests that while seniors constitute a significant demographic group in need of social housing support, they may not represent the majority of applicants. Understanding this dynamic is crucial for policymakers and housing providers to tailor their strategies and resources effectively to address the diverse needs of applicants across different age groups.
+The dot plot @figure2 comparing total active applications to seniors' applications from Q1 2019 to Q4 2023 provides valuable insights into the demographics of individuals seeking social housing assistance and the overall trends in application numbers over time. From the graph, it is evident that both total active applications and seniors' applications exhibit fluctuations throughout the observed period. However, seniors' applications appear to comprise a relatively smaller proportion of the total active applications, as indicated by the consistently lower values for seniors' applications compared to total active applications. This disparity suggests that while seniors constitute a significant demographic group in need of social housing support, they may not represent the majority of applicants. Understanding this dynamic is crucial for policymakers and housing providers to tailor their strategies and resources effectively to address the diverse needs of applicants across different age groups.
 
 Moreover, the fluctuating trends in both total active applications and seniors' applications highlight the dynamic nature of housing demand and the complex socio-economic factors influencing individuals' housing situations. Further analysis may be warranted to explore the underlying reasons behind these fluctuations, such as changes in demographic trends, economic conditions, or shifts in housing policies and programs. Overall, this graph underscores the importance of considering demographic diversity and changing trends in social housing applications when developing and implementing policies and programs aimed at addressing housing needs and promoting housing equity for all segments of the population.
 
@@ -200,8 +199,8 @@ plot_data$Year_Quarter <- factor(plot_data$Year_Quarter, levels = unique(plot_da
 
 # Create a line plot
 ggplot(plot_data, aes(x = Year_Quarter)) +
-  geom_line(aes(y = household_no_dependents, color = "Household without Dependents"), size = 1.2) +
-  geom_line(aes(y = household_with_dependents, color = "Household with Dependents"), linetype = "dashed", size = 1.2) +
+  geom_point(aes(y = household_no_dependents, color = "Household without Dependents"), size = 1.2) +
+  geom_point(aes(y = household_with_dependents, color = "Household with Dependents"), linetype = "dashed", size = 1.2) +
   scale_color_manual(values = c("blue", "red")) +
   labs(title = "Households with and without Dependents Applying for Social Housing",
        x = "Year Quarter",
@@ -211,7 +210,7 @@ ggplot(plot_data, aes(x = Year_Quarter)) +
 
 ```
 
-The line plot comparing households with and without dependents applying for social housing from Q1 2019 to Q4 2023 provides valuable insights into the composition of applicants and potential variations in housing needs among different household types over time. From the graph, we observe fluctuations in both the number of households with and without dependents applying for social housing throughout the observed period. Interestingly, the number of households with dependents appears to fluctuate more prominently compared to households without dependents, as indicated by the greater variability in the dashed line representing households with dependents.
+The line plot @figure3 comparing households with and without dependents applying for social housing from Q1 2019 to Q4 2023 provides valuable insights into the composition of applicants and potential variations in housing needs among different household types over time. From the graph, we observe fluctuations in both the number of households with and without dependents applying for social housing throughout the observed period. Interestingly, the number of households with dependents appears to fluctuate more prominently compared to households without dependents, as indicated by the greater variability in the dashed line representing households with dependents.
 
 This variation in the number of applications from households with dependents may reflect changes in family dynamics, economic conditions, or social factors affecting household composition and housing stability. For instance, economic downturns or changes in family circumstances could lead to fluctuations in the number of households with dependents seeking social housing support. Understanding these dynamics is crucial for policymakers and housing providers to tailor their programs and services effectively to meet the diverse needs of households with different compositions. It highlights the importance of considering family size, structure, and specific needs when designing housing assistance programs and allocating resources to address housing insecurity and promote housing stability for vulnerable populations.
 
@@ -255,8 +254,8 @@ plot_data$Total_Active_Waiting_List <- total_active_waiting_list
 
 # Create a line plot
 ggplot(plot_data, aes(x = quarter_year)) +
-  geom_line(aes(y = Inactive_Cancelled, color = "Inactive/Cancelled"), size = 1.2) +
-  geom_line(aes(y = Total_Active_Waiting_List, color = "Total Active Waiting List"), linetype = "dashed", size = 1.2) +
+  geom_point(aes(y = Inactive_Cancelled, color = "Inactive/Cancelled"), size = 1.2) +
+  geom_point(aes(y = Total_Active_Waiting_List, color = "Total Active Waiting List"), linetype = "dashed", size = 1.2) +
   scale_color_manual(values = c("blue", "red")) +
   labs(title = "Inactive/Cancelled vs Total Active Waiting List",
        x = "Quarter Year",
