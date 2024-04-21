@@ -159,8 +159,8 @@ plot_data$quarter_year <-
 
 # Create a plot
 ggplot(plot_data, aes(x = quarter_year)) +
-  geom_line(aes(y = test, color = "Total Active Applications"), size = 1.2) +
-  geom_line(aes(y = test, color = "Seniors' Applications"), linetype = "dashed", size = 1.2) +
+  geom_point(aes(y = test), color = "red") +
+  geom_point(aes(y = housed), color = "blue") +
   scale_color_manual(values = c("blue", "red")) +
   labs(title = "Total Active Applications vs. Seniors' Applications",
        x = "Quarter Year",
