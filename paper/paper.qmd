@@ -36,28 +36,35 @@ By recognizing the unique needs of households with dependents and understanding 
 
 Data Sourcing
 
-Data is sourced from Open Data Toronto. 
+This data is sourced from Open Data Toronto, a public platform that offers a wide array of datasets relevant to various aspects of urban life, including housing, transportation, public health, and more. This initiative allows researchers, policymakers, and the general public to access and utilize city-managed data in an effort to foster transparency, drive innovation, and facilitate informed decision-making. Utilizing such open data platforms ensures that the information is not only readily available but also consistently updated and maintained according to government standards. This approach helps in compiling comprehensive and reliable datasets that are crucial for conducting thorough analyses, like the study of housing application trends, thereby contributing to more effective urban planning and policy development.
 
-The data in this post was compiled using open source statistical programming language R (RCoreTeam). It uses functionalists from readxl, dplyr, ggplot2, here, and readr. The cleaning process focuses on transforming the data from the third column onward. It uses the mutate and across functions in dplyr to standardize the responses by converting any values that are not "yes" or "no" to NA (missing values), ensuring that the data set contains only clear binary responses for analysis. This step is critical to maintaining the consistency and reliability of the data set, as it filters out ambiguous or invalid entries. Finally, the cleaned data is saved as a CSV file in the specified "analysis_data" directory. This allows access to the cleaned data set for further analysis or reporting. Using write.csv with line name = FALSE ensures the output file is neat.
+The data in this post was compiled using open source statistical programming language R @RCoreTeam. It uses functionalists such as janitor and ggplot2. Finally, the cleaned data is saved as a CSV file in the specified "analysis_data" directory. This allows access to the cleaned data set for further analysis or reporting. Using write.csv with line name = FALSE ensures the output file is neat.
 
 
 Data Cleaning
 
-To clean the data for better analysis processing, necessary columns such as how many bedrooms are in the social housing units and repetitive columns were removed.
+To clean the data for better analysis processing, unnecessary columns such as how many bedrooms are in the social housing units and repetitive columns were removed. We use the function 'janitor' to achieve intended data cleaning.
 
 
 ```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
+#| label: applications
+#| fig-cap: New and total applications comparison
 #| echo: false
 
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+# Load the required libraries
+library(dplyr)
+
+# First, ensure that the Quarter/Year column is read correctly
+data$Quarter_Year <- as.character(analysis_data$Quarter_Year)
+
+# Filter data for specific quarters
+specific_quarters <- data %>%
+  filter(Quarter_Year %in% c("Q1 2019", "Q1 2020", "Q1 2022", "Q1 2023")) %>%
+  select(Quarter_Year, New_reactivated = New_reactivated, Total_active_waiting_list = Total_active_waiting_list)
+
+# View the table
+specific_quarters
+
 ```
 
 Talk more about it.
@@ -153,7 +160,7 @@ plot_data$quarter_year <-
 
 # Create a line plot
 ggplot(plot_data, aes(x = quarter_year)) +
-  geom_line(aes(y = Total_Active_Waiting_List, color = "Total Active Applications"), size = 1.2) +
+  geom_line(aes(y = total_active_waiting_list, color = "Total Active Applications"), size = 1.2) +
   geom_line(aes(y = Seniors, color = "Seniors' Applications"), linetype = "dashed", size = 1.2) +
   scale_color_manual(values = c("blue", "red")) +
   labs(title = "Total Active Applications vs. Seniors' Applications",
@@ -262,6 +269,8 @@ ggplot(plot_data, aes(x = quarter_year)) +
 ```
 
 
+
+
 # Discussion
 
 ## First discussion point {#sec-first-point}
@@ -284,7 +293,10 @@ In summary, the analysis of household compositions in social housing application
 
 ## Weaknesses and next steps
 
-Weaknesses and next steps should also be included.
+One potential weakness in the data and its processing pertains to the level of details and completeness of the data collected. The dataset only provides aggregated numbers for new/reactivated applications, housed individuals, inactive/cancelled applications, and the total active waiting list, segmented by quarter and year. Such aggregation may obscure underlying patterns or anomalies that could be important for more detailed analysis. For instance, without data on the reasons for application cancellations or the demographic details of applicants, it's difficult to pinpoint specific challenges or needs within the housing system. Furthermore, if the dataset lacks consistent data collection methods across quarters or contains missing data for certain quarters, this could lead to skewed analyses and unreliable conclusions.
+
+Regarding the processing and visualization aspect in R, while the script effectively generates a comparative line plot, it does not incorporate any statistical analysis to assess trends or significant changes over time. The choice to display only two metrics (inactive/cancelled and total active waiting list) might oversimplify the complex dynamics of housing needs and availability. Additionally, the plot assumes that the viewer will understand the implications of the data trends without providing contextual aids such as confidence intervals, which could inform the viewer about the variability or certainty of the plotted trends. The visualization might benefit from a multi-dimensional approach, perhaps including other relevant metrics or employing different types of visualizations to provide a more comprehensive view of the data. This would allow stakeholders to make more informed decisions based on a clearer understanding of all influencing factors.
+To enhance our understanding and analysis of the housing data, the next steps should involve increasing the detail level and expanding the scope of data collected. This could include gathering demographic information about applicants, such as age, income, and family size, as well as reasons for application cancellations or reactivations. Implementing more advanced statistical techniques to identify trends and correlations over time would also be beneficial. Additionally, integrating geographic data could help identify regional disparities and specific areas of need. These efforts would not only provide a more comprehensive view of the housing situation but also aid in tailoring housing policies and interventions to better meet the specific needs of different populations.
 
 \newpage
 
