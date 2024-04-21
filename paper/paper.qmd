@@ -158,9 +158,9 @@ plot_data <- data.frame(
 plot_data$quarter_year <- 
   factor(plot_data$quarter_year, levels = unique(plot_data$quarter_year))
 
-# Create a line plot
+# Create a plot
 ggplot(plot_data, aes(x = quarter_year)) +
-  geom_line(aes(y = total_active_waiting_list, color = "Total Active Applications"), size = 1.2) +
+  geom_line(aes(y = test, color = "Total Active Applications"), size = 1.2) +
   geom_line(aes(y = Seniors, color = "Seniors' Applications"), linetype = "dashed", size = 1.2) +
   scale_color_manual(values = c("blue", "red")) +
   labs(title = "Total Active Applications vs. Seniors' Applications",
@@ -185,11 +185,10 @@ Moreover, the fluctuating trends in both total active applications and seniors' 
 # Load required packages
 library(ggplot2)
 
-# Assuming your dataset is loaded into a variable named 'raw_data'
 # Extract relevant columns with adjusted column names
-year_quarter <- raw_data$Quarter_Year
-household_no_dependents <- raw_data$Household_no_dependents
-household_with_dependents <- raw_data$Household_with_dependents
+year_quarter <- analysis_data$Quarter_Year
+household_no_dependents <- analysis_data$Household_no_dependents
+household_with_dependents <- analysis_data$Household_with_dependents
 
 # Create a data frame
 plot_data <- data.frame(Year_Quarter = year_quarter,
