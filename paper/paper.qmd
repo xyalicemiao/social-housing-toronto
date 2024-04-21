@@ -6,7 +6,7 @@ author:
 thanks: "Code and data are available at: LINK."
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This paper investigates household composition dynamics in social housing applications in Toronto from Q1 2019 to Q4 2023. Analyzing application data, the study examines patterns in households applying for housing assistance, focusing on those with and without dependents. Findings reveal fluctuating trends, highlighting the challenges faced by families in accessing stable and affordable housing in Toronto. By understanding these dynamics, policymakers can develop targeted interventions to promote housing equity and stability for vulnerable families in the city, contributing to ongoing efforts to address housing affordability and access issues in Toronto."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -31,11 +31,15 @@ By recognizing the unique needs of households with dependents and understanding 
 
 # Data {#sec-data}
 
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
 
 Data Sourcing
 
-Data is sourced from Open Data Toronto.
+Data is sourced from Open Data Toronto. 
+
+
+Data Cleaning
+
+
 
 
 ```{r}
@@ -74,7 +78,6 @@ analysis_data |>
 ```
 
 The maps of Toronto showing where those social housing are spread gives the reader a more specific sense of what they look like in Toronto.
-
 
 
 
@@ -210,21 +213,21 @@ Moreover, further analysis of the underlying factors driving fluctuations in app
 # Discussion
 
 ## First discussion point {#sec-first-point}
-The observed dynamics in social housing demand and supply, as evidenced by the fluctuating patterns in application rates and the persistent gap between new entries and households housed, underscore the complex interplay of socio-economic factors influencing housing access and affordability. Research by Desmond and Kimbro (2015) highlights the intricate relationship between housing instability and poverty, wherein marginalized communities often face challenges in accessing stable and affordable housing options. Moreover, studies by Fitzpatrick et al. (2019) emphasize the role of structural inequalities and systemic barriers in perpetuating housing disparities, particularly among vulnerable populations such as seniors and single individuals. The phenomenon of fluctuating waiting list trends and demographic compositions may be attributed to various factors, including inadequate affordable housing stock, rising housing costs, and limited access to supportive services and resources. Additionally, the complexities of managing waiting lists and addressing changing applicant circumstances further contribute to the observed variations in social housing demand. Effective policy interventions aimed at addressing housing inequities and enhancing housing affordability are crucial in mitigating these challenges and ensuring equitable access to housing for all members of society (Desmond & Kimbro, 2015; Fitzpatrick et al., 2019).
+The observed dynamics in social housing demand and supply, as evidenced by the fluctuating patterns in application rates and the persistent gap between new entries and households housed, underscore the complex interplay of socio-economic factors influencing housing access and affordability. Research by Desmond and @desmond2015 highlights the intricate relationship between housing instability and poverty, wherein marginalized communities often face challenges in accessing stable and affordable housing options. Moreover, studies by @fitzpatrick2019 emphasize the role of structural inequalities and systemic barriers in perpetuating housing disparities, particularly among vulnerable populations such as seniors and single individuals. The phenomenon of fluctuating waiting list trends and demographic compositions may be attributed to various factors, including inadequate affordable housing stock, rising housing costs, and limited access to supportive services and resources. Additionally, the complexities of managing waiting lists and addressing changing applicant circumstances further contribute to the observed variations in social housing demand. Effective policy interventions aimed at addressing housing inequities and enhancing housing affordability are crucial in mitigating these challenges and ensuring equitable access to housing for all members of society @desmond2015, @fitzpatrick2019.
 
 ## Second discussion point
 
-The visualization of total active applications versus seniors' applications from Q1 2019 to Q4 2023 sheds light on the significant representation of seniors within the social housing applicant pool. The observation that seniors comprise at least one-third of the total applications underscores the pronounced housing needs among older adults within the community. Research by Morrow-Howell et al. (2016) emphasizes the growing demographic shift towards an aging population and the subsequent implications for housing demand, particularly among low-income seniors. Furthermore, studies by Burholt and Windle (2006) highlight the multifaceted challenges faced by older adults in accessing suitable housing options, including financial constraints, physical health limitations, and social isolation. The substantial presence of seniors within the applicant pool suggests a pressing need for targeted interventions and policy measures to address the unique housing needs of this vulnerable demographic group (Morrow-Howell et al., 2016; Burholt & Windle, 2006).
+The visualization of total active applications versus seniors' applications from Q1 2019 to Q4 2023 sheds light on the significant representation of seniors within the social housing applicant pool. The observation that seniors comprise at least one-third of the total applications underscores the pronounced housing needs among older adults within the community. Research by @morrow2016 emphasizes the growing demographic shift towards an aging population and the subsequent implications for housing demand, particularly among low-income seniors. Furthermore, studies by @burholt2006 highlight the multifaceted challenges faced by older adults in accessing suitable housing options, including financial constraints, physical health limitations, and social isolation. The substantial presence of seniors within the applicant pool suggests a pressing need for targeted interventions and policy measures to address the unique housing needs of this vulnerable demographic group @morrow2016; @burholt2006.
 
-Moreover, the high proportion of seniors' applications relative to the total applicant pool underscores the importance of incorporating age-specific considerations into housing policy and program development. Research by Butler and Robison (2001) emphasizes the significance of age-in-place initiatives and supportive housing models tailored to the needs of older adults, facilitating aging in community settings and promoting independence and well-being. Additionally, studies by Gonyea et al. (2017) highlight the benefits of integrated housing and service programs for seniors, addressing both housing and health-related needs and enhancing overall quality of life. The findings from the visualization underscore the imperative for comprehensive housing strategies that prioritize the housing security and dignity of seniors while addressing broader societal challenges related to aging and housing inequities (Butler & Robison, 2001; Gonyea et al., 2017).
+Moreover, the high proportion of seniors' applications relative to the total applicant pool underscores the importance of incorporating age-specific considerations into housing policy and program development. Research by @butler2001 emphasizes the significance of age-in-place initiatives and supportive housing models tailored to the needs of older adults, facilitating aging in community settings and promoting independence and well-being. Additionally, studies by @gonyea2017 highlight the benefits of integrated housing and service programs for seniors, addressing both housing and health-related needs and enhancing overall quality of life. The findings from the visualization underscore the imperative for comprehensive housing strategies that prioritize the housing security and dignity of seniors while addressing broader societal challenges related to aging and housing inequities @butler2001; @gonyea2017.
 
 ## Third discussion point
 
-The analysis of the line plot comparing households with and without dependents applying for social housing sheds light on the complex interplay of socio-economic factors influencing housing needs and family structures. The observed fluctuations in applications from households with dependents suggest dynamic changes in family dynamics and economic circumstances over time. Research by Clampet-Lundquist et al. (2011) emphasizes the importance of considering household composition in housing policy and interventions, as households with dependents often face unique challenges in accessing stable and affordable housing. For instance, fluctuations in applications from households with dependents may reflect changes in employment opportunities, income levels, or housing affordability, which impact family decision-making regarding housing choices and stability.
+The analysis of the line plot comparing households with and without dependents applying for social housing sheds light on the complex interplay of socio-economic factors influencing housing needs and family structures. The observed fluctuations in applications from households with dependents suggest dynamic changes in family dynamics and economic circumstances over time. Research by @clampet2011 emphasizes the importance of considering household composition in housing policy and interventions, as households with dependents often face unique challenges in accessing stable and affordable housing. For instance, fluctuations in applications from households with dependents may reflect changes in employment opportunities, income levels, or housing affordability, which impact family decision-making regarding housing choices and stability.
 
-Moreover, studies by Murdie and Teixeira (2019) highlight the role of socio-economic factors and policy interventions in shaping housing outcomes for families, particularly those with children. The greater variability observed in applications from households with dependents compared to those without dependents underscores the diverse and evolving needs of families in the social housing system. Understanding these dynamics is essential for policymakers and housing providers to develop targeted interventions and support services that address the specific needs of families with dependents and promote housing equity for all members of society.
+Moreover, studies by @murdie2019 highlight the role of socio-economic factors and policy interventions in shaping housing outcomes for families, particularly those with children. The greater variability observed in applications from households with dependents compared to those without dependents underscores the diverse and evolving needs of families in the social housing system. Understanding these dynamics is essential for policymakers and housing providers to develop targeted interventions and support services that address the specific needs of families with dependents and promote housing equity for all members of society.
 
-In summary, the analysis of household compositions in social housing applications offers valuable insights into the nuanced challenges and vulnerabilities faced by families in accessing stable and affordable housing. By recognizing the unique needs of households with dependents and implementing evidence-based policy interventions, policymakers can work towards reducing housing disparities and promoting housing stability for vulnerable families in need (Clampet-Lundquist et al., 2011; Murdie & Teixeira, 2019).
+In summary, the analysis of household compositions in social housing applications offers valuable insights into the nuanced challenges and vulnerabilities faced by families in accessing stable and affordable housing. By recognizing the unique needs of households with dependents and implementing evidence-based policy interventions, policymakers can work towards reducing housing disparities and promoting housing stability for vulnerable families in need @clampet2011; @murdie2019.
 
 
 ## Weaknesses and next steps

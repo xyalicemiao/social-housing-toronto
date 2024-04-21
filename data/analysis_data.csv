@@ -1,4 +1,4 @@
-_id,Quarter/Year,New/reactivated,Housed,Inactive/cancelled,Total active waiting list,Household no dependents,Household with dependents,Seniors
+id,quarter_year,new_reactivated,housed,inactive_cancelled,total_active_waiting_list,household_no_dependents,household_with_dependents,seniors
 1,Q1 2019,6181,522,4138,102049,38044,28223,35782
 2,Q2 2019,5085,805,25297,78796,29171,21081,28544
 3,Q3 2019,5434,767,6817,77024,28442,20665,27917
