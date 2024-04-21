@@ -19,6 +19,8 @@ bibliography: references.bib
 
 library(tidyverse)
 library(palmerpenguins)
+
+analysis_data <- read_csv(here::here("data/analysis_data.csv"))
 ```
 
 
@@ -36,10 +38,12 @@ Data Sourcing
 
 Data is sourced from Open Data Toronto. 
 
+The data in this post was compiled using open source statistical programming language R (RCoreTeam). It uses functionalists from readxl, dplyr, ggplot2, here, and readr. The cleaning process focuses on transforming the data from the third column onward. It uses the mutate and across functions in dplyr to standardize the responses by converting any values that are not "yes" or "no" to NA (missing values), ensuring that the data set contains only clear binary responses for analysis. This step is critical to maintaining the consistency and reliability of the data set, as it filters out ambiguous or invalid entries. Finally, the cleaned data is saved as a CSV file in the specified "analysis_data" directory. This allows access to the cleaned data set for further analysis or reporting. Using write.csv with line name = FALSE ensures the output file is neat.
+
 
 Data Cleaning
 
-
+To clean the data for better analysis processing, necessary columns such as how many bedrooms are in the social housing units and repetitive columns were removed.
 
 
 ```{r}
@@ -60,22 +64,6 @@ Talk more about it.
 
 And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
 
-```{r}
-#| label: fig-planes
-#| fig-cap: Relationship between wing length and width
-#| echo: false
-#| warning: false
-#| message: false
-
-analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
-
-analysis_data |> 
-  ggplot(aes(x = width, y = length)) +
-  geom_point(alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Wing width (mm)",
-       y = "Wing length (mm)")
-```
 
 The maps of Toronto showing where those social housing are spread gives the reader a more specific sense of what they look like in Toronto.
 
@@ -85,6 +73,9 @@ The maps of Toronto showing where those social housing are spread gives the read
 
 
 The dataset "Centralized Waitlist for Social Housing" provides detailed information on the activities related to the social housing waitlist in Toronto for various quarters starting from Q1 2019. It includes data on new/reactivated applications, the number of households housed, inactive/cancelled applications, and the total active waiting list. Additionally, it breaks down the waiting list by household type (e.g., no dependents, with dependents, seniors).
+
+
+**Figure 1:**
 
 
 ```{r}
@@ -97,22 +88,26 @@ The dataset "Centralized Waitlist for Social Housing" provides detailed informat
 library(ggplot2)
 
 # Extract relevant columns with adjusted column names
-year_quarter <- raw_data$Quarter_Year
-new_reactivated_applications <- raw_data$New_reactivated
-housed <- raw_data$Housed
+year_quarter <- analysis_data$quarter_year
+new_reactivated_applications <- analysis_data$new_reactivated
+housed <- analysis_data$housed
 
 # Create a data frame
-plot_data <- data.frame(Year_Quarter = year_quarter,
-                        New_Reactivated_Applications = new_reactivated_applications,
-                        Housed = housed)
+plot_data <- data.frame(
+              quarter_year = year_quarter,
+              test = new_reactivated_applications,
+              housed = housed
+            )
 
-# Convert Year_Quarter to factor to maintain order
-plot_data$Year_Quarter <- factor(plot_data$Year_Quarter, levels = unique(plot_data$Year_Quarter))
+# Convert Quarter/Year to factor to maintain order
+plot_data$quarter_year <- 
+  factor(plot_data$quarter_year, levels = unique(plot_data$quarter_year))
 
-# Create a line plot
-ggplot(plot_data, aes(x = Year_Quarter)) +
-  geom_line(aes(y = New_Reactivated_Applications, color = "New/Reactivated Applications"), size = 1.2) +
-  geom_line(aes(y = Housed, color = "Housed"), linetype = "dashed", size = 1.2) +
+# Create a plot
+ggplot(plot_data, 
+       aes(x = quarter_year)) +
+  geom_point(aes(y = test), color = "red") +
+  geom_point(aes(y = housed), color = "blue") +
   scale_color_manual(values = c("blue", "red")) +
   labs(title = "Yearly New/Reactivated Applications vs. Housed",
        x = "Year Quarter",
@@ -128,6 +123,8 @@ Examining waiting list trends further illuminates the complexities involved in m
 Moreover, an analysis of the waiting list composition reveals critical insights into the demographics of those in need of social housing. A significant portion of seniors and households without dependents feature prominently in the waiting list, indicating a pressing need for housing support among these vulnerable groups. This demographic composition underscores broader social and economic challenges, including affordability issues for seniors and single individuals, necessitating targeted interventions and policy measures to address housing inequities and ensure inclusive access to adequate housing for all segments of the population.
 
 
+**Figure 2:**
+
 ```{r}
 #| echo: false
 #| eval: true
@@ -139,20 +136,23 @@ Moreover, an analysis of the waiting list composition reveals critical insights 
 library(ggplot2)
 
 # Extract relevant columns with adjusted column names
-quarter/year <- raw_data$Quarter/Year
-total_active <- raw_data$Total_active_waiting_list
-seniors <- raw_data$Seniors
+year_quarter <- analysis_data$quarter_year
+new_reactivated_applications <- analysis_data$new_reactivated
+housed <- analysis_data$housed
 
 # Create a data frame
-plot_data <- data.frame(Quarter/Year = quarter/year,
-                        Total_active_waiting_list = total_active,
-                        Seniors = seniors)
+plot_data <- data.frame(
+              quarter_year = year_quarter,
+              test = new_reactivated_applications,
+              housed = housed
+            )
 
 # Convert Quarter/Year to factor to maintain order
-plot_data$Quarter/Year <- factor(plot_data$Quarter/Year, levels = unique(plot_data$Year/Quarter))
+plot_data$quarter_year <- 
+  factor(plot_data$quarter_year, levels = unique(plot_data$quarter_year))
 
 # Create a line plot
-ggplot(plot_data, aes(x = Quarter_Year)) +
+ggplot(plot_data, aes(x = quarter_year)) +
   geom_line(aes(y = Total_Active_Waiting_List, color = "Total Active Applications"), size = 1.2) +
   geom_line(aes(y = Seniors, color = "Seniors' Applications"), linetype = "dashed", size = 1.2) +
   scale_color_manual(values = c("blue", "red")) +
@@ -166,6 +166,8 @@ ggplot(plot_data, aes(x = Quarter_Year)) +
 The line plot comparing total active applications to seniors' applications from Q1 2019 to Q4 2023 provides valuable insights into the demographics of individuals seeking social housing assistance and the overall trends in application numbers over time. From the graph, it is evident that both total active applications and seniors' applications exhibit fluctuations throughout the observed period. However, seniors' applications appear to comprise a relatively smaller proportion of the total active applications, as indicated by the consistently lower values for seniors' applications compared to total active applications. This disparity suggests that while seniors constitute a significant demographic group in need of social housing support, they may not represent the majority of applicants. Understanding this dynamic is crucial for policymakers and housing providers to tailor their strategies and resources effectively to address the diverse needs of applicants across different age groups.
 
 Moreover, the fluctuating trends in both total active applications and seniors' applications highlight the dynamic nature of housing demand and the complex socio-economic factors influencing individuals' housing situations. Further analysis may be warranted to explore the underlying reasons behind these fluctuations, such as changes in demographic trends, economic conditions, or shifts in housing policies and programs. Overall, this graph underscores the importance of considering demographic diversity and changing trends in social housing applications when developing and implementing policies and programs aimed at addressing housing needs and promoting housing equity for all segments of the population.
+
+**Figure 3:**
 
 ```{r}
 #| echo: false
@@ -208,6 +210,56 @@ The line plot comparing households with and without dependents applying for soci
 This variation in the number of applications from households with dependents may reflect changes in family dynamics, economic conditions, or social factors affecting household composition and housing stability. For instance, economic downturns or changes in family circumstances could lead to fluctuations in the number of households with dependents seeking social housing support. Understanding these dynamics is crucial for policymakers and housing providers to tailor their programs and services effectively to meet the diverse needs of households with different compositions. It highlights the importance of considering family size, structure, and specific needs when designing housing assistance programs and allocating resources to address housing insecurity and promote housing stability for vulnerable populations.
 
 Moreover, further analysis of the underlying factors driving fluctuations in applications from households with and without dependents may provide valuable insights into broader socio-economic trends and challenges affecting housing affordability, access, and stability for families in need. Such insights can inform evidence-based policy interventions and targeted strategies aimed at addressing housing disparities and promoting equitable access to affordable and suitable housing for all households, regardless of their composition.
+
+
+**Figure 4:**
+
+```{r}
+#| echo: false
+#| eval: true
+#| warning: false
+#| message: false
+
+# Load required packages
+library(ggplot2)
+
+# Extract relevant columns with adjusted column names
+year_quarter <- analysis_data$quarter_year
+new_reactivated_applications <- analysis_data$new_reactivated
+housed <- analysis_data$housed
+
+# Create a data frame
+plot_data <- data.frame(
+              quarter_year = year_quarter,
+              test = new_reactivated_applications,
+              housed = housed
+            )
+
+# Convert Quarter/Year to factor to maintain order
+plot_data$quarter_year <- 
+  factor(plot_data$quarter_year, levels = unique(plot_data$quarter_year))
+
+# Extract relevant columns
+inactive_cancelled <- analysis_data$inactive_cancelled
+total_active_waiting_list <- analysis_data$total_active_waiting_list
+
+# Add the new data to the existing plot_data data frame
+plot_data$Inactive_Cancelled <- inactive_cancelled
+plot_data$Total_Active_Waiting_List <- total_active_waiting_list
+
+# Create a line plot
+ggplot(plot_data, aes(x = quarter_year)) +
+  geom_line(aes(y = Inactive_Cancelled, color = "Inactive/Cancelled"), size = 1.2) +
+  geom_line(aes(y = Total_Active_Waiting_List, color = "Total Active Waiting List"), linetype = "dashed", size = 1.2) +
+  scale_color_manual(values = c("blue", "red")) +
+  labs(title = "Inactive/Cancelled vs Total Active Waiting List",
+       x = "Quarter Year",
+       y = "Application Status") +
+  theme_minimal() +
+  theme(legend.title = element_blank())
+
+
+```
 
 
 # Discussion
