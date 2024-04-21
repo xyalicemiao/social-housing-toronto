@@ -192,16 +192,16 @@ household_with_dependents <- analysis_data$Household_with_dependents
 
 # Create a data frame
 plot_data <- data.frame(Year_Quarter = year_quarter,
-                        Household_no_dependents = household_no_dependents,
-                        Household_with_dependents = household_with_dependents)
+                        household_no_dependents = household_no_dependents,
+                        household_with_dependents = household_with_dependents)
 
 # Convert Year_Quarter to factor to maintain order
 plot_data$Year_Quarter <- factor(plot_data$Year_Quarter, levels = unique(plot_data$Year_Quarter))
 
 # Create a line plot
 ggplot(plot_data, aes(x = Year_Quarter)) +
-  geom_line(aes(y = Household_no_dependents, color = "Household without Dependents"), size = 1.2) +
-  geom_line(aes(y = Household_with_dependents, color = "Household with Dependents"), linetype = "dashed", size = 1.2) +
+  geom_line(aes(y = household_no_dependents, color = "Household without Dependents"), size = 1.2) +
+  geom_line(aes(y = household_with_dependents, color = "Household with Dependents"), linetype = "dashed", size = 1.2) +
   scale_color_manual(values = c("blue", "red")) +
   labs(title = "Households with and without Dependents Applying for Social Housing",
        x = "Year Quarter",
