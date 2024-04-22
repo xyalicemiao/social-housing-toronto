@@ -1,4 +1,4 @@
-## Social Housing in Toronto: Investigating Status from Waiting Lists and Their Social Implications
+# Social Housing in Toronto: Investigating Status from Waiting Lists and Their Social Implications
 
 #Overview
 
