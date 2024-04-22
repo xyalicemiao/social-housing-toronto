@@ -174,13 +174,13 @@ library(ggplot2)
 
 # Extract relevant columns with adjusted column names
 year_quarter <- analysis_data$Quarter_Year
-household_no_dependents <- analysis_data$Household_no_dependents
-household_with_dependents <- analysis_data$Household_with_dependents
+tes1 <- analysis_data$Household_no_dependents
+test2 <- analysis_data$Household_with_dependents
 
 # Create a data frame
 plot_data <- data.frame(Year_Quarter = year_quarter,
-                        household_no_dependents = household_no_dependents,
-                        household_with_dependents = household_with_dependents)
+                        test1 = household_no_dependents,
+                        test2 = household_with_dependents)
 
 # Convert Year_Quarter to factor to maintain order
 plot_data$Year_Quarter <- factor(plot_data$Year_Quarter, levels = unique(plot_data$Year_Quarter))
