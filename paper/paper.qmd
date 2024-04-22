@@ -73,6 +73,7 @@ The dataset "Centralized Waitlist for Social Housing" provides detailed informat
 
 ```{r}
 #| label: fig-new-and-housed
+#| fig-cap: Yearly New/Reactivated Applications vs. Housed
 #| fig.pos: H
 #| echo: false
 #| eval: true
@@ -122,6 +123,7 @@ The consistent gap between the red and blue dots underscores a significant chall
 
 ```{r}
 #| label: fig-total-and-seniors
+#| fig-cap: Total Active Applications vs. Seniors Applications
 #| fig.pos: H
 #| echo: false
 #| eval: true
@@ -169,6 +171,7 @@ The high and stable total application numbers highlight the ongoing demand for s
 
 ```{r}
 #| label: fig-dependents-or-not
+#| fig-cap: Households with and without Dependents Applying for Social Housing
 #| fig.pos: H
 #| echo: false
 #| eval: true
@@ -213,6 +216,7 @@ Furthermore, the steadier trend seen with individuals without dependents could p
 
 ```{r}
 #| label: fig-cancelled-vs-total
+#| fig-cap: Inactive/Cancelled vs Total Active Waiting List
 #| fig.pos: H
 #| echo: false
 #| eval: true
