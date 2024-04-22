@@ -1,1 +1,3 @@
-# social-housing-toronto
+# Social Housing in Toronto: Investigating Status from Waiting Lists and Their Social Implications
+
+This paper investigates household composition dynamics in social housing applications in Toronto from Q1 2019 to Q4 2023. Analyzing application data, the study examines patterns in households applying for housing assistance, focusing on those with and without dependents. Findings reveal fluctuating trends, highlighting the challenges faced by families in accessing stable and affordable housing in Toronto. By understanding these dynamics, policymakers can develop targeted interventions to promote housing equity and stability for vulnerable families in the city, contributing to ongoing efforts to address housing affordability and access issues in Toronto.
