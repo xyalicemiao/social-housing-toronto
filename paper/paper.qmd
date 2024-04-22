@@ -19,8 +19,11 @@ bibliography: references.bib
 
 library(tidyverse)
 library(palmerpenguins)
+library(tinytex)
+
 
 analysis_data <- read_csv(here::here("data/analysis_data.csv"))
+
 ```
 
 
@@ -225,7 +228,7 @@ inactive_cancelled <- analysis_data$inactive_cancelled
 # Create a data frame
 plot_data <- data.frame(
               quarter_year = year_quarter,
-              test = total_active_waiting_list ,
+              test = test ,
               inactive_cancelled = inactive_cancelled
             )
 
