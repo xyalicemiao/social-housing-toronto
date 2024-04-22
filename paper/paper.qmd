@@ -46,9 +46,6 @@ To clean the data for better analysis processing, unnecessary columns such as ho
 
 ```{r}
 #| label: data-overview
-#| #| fig-cap: Data Overview
-#| fig.pos: H
-#| label: applications
 #| fig-cap: Data Overview
 #| echo: false
 
@@ -222,8 +219,8 @@ library(ggplot2)
 
 # Extract relevant columns with adjusted column names
 year_quarter <- analysis_data$quarter_year
-new_reactivated_applications <- analysis_data$new_reactivated
-housed <- analysis_data$housed
+test <- analysis_data$total_active_waiting_list
+inactive_cancelled <- analysis_data$inactive_cancelled
 
 # Create a data frame
 plot_data <- data.frame(
