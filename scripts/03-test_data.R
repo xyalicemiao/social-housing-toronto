@@ -10,7 +10,19 @@
 #### Workspace setup ####
 library(tidyverse)
 
-#### Test data ####
+#### Test 1 ####
+
+# Load data
+data <- read.csv(here::here("data/analysis_data.csv"))
+
+# Test to ensure there are no missing values in any cell of the dataset
+no_missing_values <- !anyNA(data)
+
+# Print the test result
+print(no_missing_values)
+
+
+#### Test 2 ###
 
 # Load data
 data <- read.csv(here::here("data/analysis_data.csv"))
@@ -21,4 +33,34 @@ test_results <- data %>%
 
 # Print the test results
 print(test_results)
+
+
+#### Test 3 ####
+
+# Load data
+data <- read.csv(here::here("data/analysis_data.csv"))
+
+# Test to ensure all numeric values are integers
+test_results <- data %>% 
+  summarise(across(where(is.numeric), ~ all(. == floor(.))))
+
+# Print the test results
+print(test_results)
+
+
+#### Test 4 ####
+
+# Load data
+data <- read.csv(here::here("data/analysis_data.csv"))
+
+# Test to ensure there are no missing values in the dataset
+test_results <- data %>% 
+  summarise(across(everything(), ~ all(complete.cases(.))))
+
+# Print the test results
+print(test_results)
+
+
+
+
 
