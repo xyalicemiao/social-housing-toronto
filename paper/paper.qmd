@@ -48,8 +48,8 @@ To clean the data for better analysis processing, unnecessary columns such as ho
 **Figure 1:**
 
 ```{r}
-#| label: data-overview
-#| fig-cap: Data Overview
+#| label: tbl-data-overview
+#| tbl-cap: Data Overview
 #| echo: false
 
 library(knitr)
@@ -60,7 +60,7 @@ kable(head(analysis_data))
 
 ```
 
-The above @data-overview is an overview of the data. It simulates the first 6 lines of all columns to give the readers an idea of what the data looks like. The complete data consists of 9 columns/variables and 20 lines/quarters of years from quarter 1 2019 to quarter 4 2023.
+The above @tbl-data-overview is an overview of the data. It simulates the first 6 lines of all columns to give the readers an idea of what the data looks like. The complete data consists of 9 columns/variables and 20 lines/quarters of years from quarter 1 2019 to quarter 4 2023.
 
 
 # Results
@@ -72,7 +72,7 @@ The dataset "Centralized Waitlist for Social Housing" provides detailed informat
 **Figure 2:**
 
 ```{r}
-#| label: new-and-housed
+#| label: fig-new-and-housed
 #| fig.pos: H
 #| echo: false
 #| eval: true
@@ -111,17 +111,17 @@ ggplot(plot_data,
   theme(legend.title = element_blank())
 
 ```
-The dot plot @new-and-housed illustrates the dynamic interplay between demand and supply within Toronto's social housing sector from Q1 2019 to Q4 2023. The data exhibits fluctuating patterns in new or reactivated social housing applications across different quarters, with a notable surge observed in Q1 2020. Despite these fluctuations, the number of households housed each quarter consistently lags behind new entries, underscoring a substantial gap between demand and supply dynamics. This persistent shortfall indicates the ongoing challenge of meeting the housing needs of vulnerable populations within the community.
+The dot plot @fig-new-and-housed illustrates the dynamic interplay between demand and supply within Toronto's social housing sector from Q1 2019 to Q4 2023. The red dots signify the number of yearly new or reactivated applications for social housing, while the blue dots illustrate the number of households that were successfully housed each year. A striking feature of the plot is the consistent positioning of the red dots well above the blue dots, which clearly indicates that every year, the number of new or reactivated applications far exceeds the number of households that are actually housed.
 
-Examining waiting list trends further illuminates the complexities involved in managing social housing demand. The total active waiting list experiences fluctuations, notably declining in Q2 2019 due to a significant number of inactive or cancelled applications. This fluctuation suggests challenges in maintaining accurate waiting lists or changes in applicants' circumstances, highlighting the multifaceted nature of addressing social housing needs. Such insights underscore the importance of robust data management and adaptive policies to effectively respond to evolving housing demands.
+A specific observation is that the number of households housed—indicated by the blue dots—remains relatively low and consistent over time, suggesting a steady capacity or rate at which the housing sector is able to accommodate applicants. In contrast, the number of new or reactivated applications represented by the red dots shows more variability, with certain years experiencing higher peaks. This variability could reflect economic cycles, changes in housing policy, or other societal factors that influence the number of individuals seeking social housing. The peaks could correspond to economic downturns or policy changes that either increase the availability of social housing or change the criteria for application, resulting in more people applying.
 
-Moreover, an analysis of the waiting list composition reveals critical insights into the demographics of those in need of social housing. A significant portion of seniors and households without dependents feature prominently in the waiting list, indicating a pressing need for housing support among these vulnerable groups. This demographic composition underscores broader social and economic challenges, including affordability issues for seniors and single individuals, necessitating targeted interventions and policy measures to address housing inequities and ensure inclusive access to adequate housing for all segments of the population.
+The consistent gap between the red and blue dots underscores a significant challenge within the social housing system: the demand for housing assistance consistently outstrips supply. This suggests that despite the efforts to house individuals and families in need, there remains a substantial number of applicants who are left on the waiting list, potentially leading to prolonged periods of housing insecurity and uncertainty for a considerable number of residents. For policymakers and social planners, this graph is a call to action, indicating the need to increase the availability of social housing, streamline the application process, or explore alternative housing solutions to bridge the gap between application and accommodation. The social implications are profound, as housing stability is closely tied to other areas of well-being, including employment, education, and mental health. Therefore, the insights from this graph are vital for informing a more strategic and compassionate response to housing needs in Toronto.
 
 
 **Figure 3:**
 
 ```{r}
-#| label: total-and-seniors
+#| label: fig-total-and-seniors
 #| fig.pos: H
 #| echo: false
 #| eval: true
@@ -159,14 +159,16 @@ ggplot(plot_data, aes(x = quarter_year)) +
   theme(legend.title = element_blank())
 
 ```
-The dot plot @total-and-seniors comparing total active applications to seniors' applications from Q1 2019 to Q4 2023 provides valuable insights into the demographics of individuals seeking social housing assistance and the overall trends in application numbers over time. From the graph, it is evident that both total active applications and seniors' applications exhibit fluctuations throughout the observed period. However, seniors' applications appear to comprise a consistantly smaller proportion of the total active applications, as indicated by the consistently lower values for seniors' applications compared to total active applications. This disparity suggests that while seniors constitute a significant demographic group in need of social housing support, they may not represent the majority of applicants. Understanding this dynamic is crucial for policymakers and housing providers to tailor their strategies and resources effectively to address the diverse needs of applicants across different age groups.
+The dot plot @fig-total-and-seniors comparing total active applications to seniors' applications from Q1 2019 to Q4 2023 provides valuable insights into the demographics of individuals seeking social housing assistance and the overall trends in application numbers over time.  The red dots at the top of the graph represent the total active applications, which appear to hold steady at a high level throughout the entire period. In contrast, the blue dots at the bottom of the graph depict seniors' applications for social housing, which are significantly lower in number compared to the total applications and remain consistent over time.
 
-Moreover, the fluctuating trends in both total active applications and seniors' applications highlight the dynamic nature of housing demand and the complex socio-economic factors influencing individuals' housing situations. Further analysis may be warranted to explore the underlying reasons behind these fluctuations, such as changes in demographic trends, economic conditions, or shifts in housing policies and programs. Overall, this graph underscores the importance of considering demographic diversity and changing trends in social housing applications when developing and implementing policies and programs aimed at addressing housing needs and promoting housing equity for all segments of the population.
+Specifically, the graph shows a persistent gap between the total number of applications and the number attributed to seniors, indicating that seniors are a smaller, consistent group within the overall pool of applicants. The fact that the number of seniors' applications is much lower than the total might suggest that the social housing system is either not as utilized by seniors or that there are not enough seniors applying or qualifying for social housing within the reporting periods. This could point to a need for more targeted outreach or specialized housing policies that cater to the elderly population's specific requirements.
+
+The high and stable total application numbers highlight the ongoing demand for social housing and suggest that this demand is not significantly driven by seniors but by other demographic groups. The constancy of the total applications suggests that the issue of housing insecurity is widespread and persists over time, reflecting systemic issues within the housing market or broader socio-economic challenges in Toronto. For social policymakers, these consistent figures could indicate a need for sustained or increased investment in social housing to keep pace with demand and address the long-term needs of the city's diverse population.
 
 **Figure 4:**
 
 ```{r}
-#| label: dependents-or-not
+#| label: fig-dependents-or-not
 #| fig.pos: H
 #| echo: false
 #| eval: true
@@ -200,17 +202,17 @@ ggplot(plot_data, aes(x = Year_Quarter)) +
 
 ```
 
-The dot plot @dependents-or-not comparing households with and without dependents applying for social housing from Q1 2019 to Q4 2023 provides valuable insights into the composition of applicants and potential variations in housing needs among different household types over time. From the graph, we observe fluctuations in both the number of households with and without dependents applying for social housing throughout the observed period. Interestingly, the number of households with dependents appears to fluctuate more prominently compared to households without dependents, as indicated by the greater variability in the dashed line representing households with dependents.
+The dot plot @fig-dependents-or-not comparing households with and without dependents applying for social housing from Q1 2019 to Q4 2023 provides valuable insights into the composition of applicants and potential variations in housing needs among different household types over time. Red dots, representing households with dependents, show more pronounced fluctuations when compared to blue dots, which symbolize households without dependents. This suggests a higher degree of instability or variability in housing needs among families, which could be a reflection of the social and economic volatility that impacts families more intensely than individuals. The red dots peak and trough more dramatically, signaling times when families are perhaps feeling the economic squeeze—times when social support becomes even more critical. From the graph, we observe fluctuations in both the number of households with and without dependents applying for social housing throughout the observed period. Interestingly, the number of households with dependents appears to fluctuate more prominently compared to households without dependents, as indicated by the greater variability in the dashed line representing households with dependents.
 
 This variation in the number of applications from households with dependents may reflect changes in family dynamics, economic conditions, or social factors affecting household composition and housing stability. For instance, economic downturns or changes in family circumstances could lead to fluctuations in the number of households with dependents seeking social housing support. Understanding these dynamics is crucial for policymakers and housing providers to tailor their programs and services effectively to meet the diverse needs of households with different compositions. It highlights the importance of considering family size, structure, and specific needs when designing housing assistance programs and allocating resources to address housing insecurity and promote housing stability for vulnerable populations.
 
-Moreover, further analysis of the underlying factors driving fluctuations in applications from households with and without dependents may provide valuable insights into broader socio-economic trends and challenges affecting housing affordability, access, and stability for families in need. Such insights can inform evidence-based policy interventions and targeted strategies aimed at addressing housing disparities and promoting equitable access to affordable and suitable housing for all households, regardless of their composition.
+Furthermore, the steadier trend seen with individuals without dependents could point to different social implications. While perhaps not as acutely affected by economic shifts, this group still requires attention to ensure that the available social housing meets their needs, which may differ significantly from those of families. This data prompts a deeper consideration of how social housing is allocated and managed, suggesting a need for programs that are sensitive to the nuances of household composition. Policies must be nuanced and empathetic, ensuring equity not just in housing provision but in the opportunity for all citizens to live with dignity and security. Such social housing strategies become foundational to building a resilient society where every individual, family, or household can weather economic storms without the risk of homelessness or displacement. Further analysis of the underlying factors driving fluctuations in applications from households with and without dependents may provide valuable insights into broader socio-economic trends and challenges affecting housing affordability, access, and stability for families in need. Such insights can inform evidence-based policy interventions and targeted strategies aimed at addressing housing disparities and promoting equitable access to affordable and suitable housing for all households, regardless of their composition.
 
 
 **Figure 5:**
 
 ```{r}
-#| label: cancelled-vs-total
+#| label: fig-cancelled-vs-total
 #| fig.pos: H
 #| echo: false
 #| eval: true
@@ -257,9 +259,12 @@ ggplot(plot_data, aes(x = quarter_year)) +
 
 
 ```
-The dot plot @cancelled-vs-total visualizes the relationship between inactive/cancelled applications and the total applications on the waiting list in Toronto's social housing sector from Q1 2019 through Q4 2023. The graph demonstrates the fluctuating nature of inactive or cancelled applications across various quarters, with notable spikes and declines that provide insights into the dynamics affecting the housing waiting list. For example, a substantial rise in cancellations or inactive statuses during specific periods, which are quarter 2 2019 and quarter 1 2021, could indicate shifts in applicant circumstances or dissatisfaction with the waiting times, which in turn impacts the overall efficiency of housing allocation. These fluctuations highlight the challenges in maintaining an active and accurate waiting list, emphasizing the need for robust management systems to handle the complexities of application statuses.
+The dot plot @fig-cancelled-vs-total visualizes the relationship between inactive/cancelled applications and the total applications on the waiting list in Toronto's social housing sector from Q1 2019 through Q4 2023. 
+This dot plot visualizes two data points related to social housing applications over several quarters from Q1 2019 to Q4 2023. The red dots represent the total number of active applications on the waiting list, while the blue dots signify the number of applications that have been either canceled or marked as inactive. Observing the graph specifically, the red dots are positioned at a high level consistently across the timeline, indicating a stable and significant demand for social housing, as the active waiting list numbers are quite high and do not show dramatic changes over time. On the other hand, the blue dots are much lower on the graph, which shows that the number of inactive or canceled applications is significantly less than the total number of active applications. However, despite being lower, the blue dots are not negligible, suggesting that there is still a considerable number of applications that are removed from the waiting list for various reasons. This is especially the case in Q2 2019 and Q1 2021, where a significantly larger-than-average numbers of applications were cancelled or became inactive. 
 
-Analyzing the total active waiting list alongside inactive or cancelled applications further illuminates the challenges faced by the housing sector in managing demand. The overall trend of the waiting list, when viewed in conjunction with the inactive or cancelled applications, suggests periods of increased strain on housing resources, possibly driven by economic factors or changes in policy. Such analysis is critical for housing authorities as it points out the need for adaptive strategies that can swiftly respond to changes in demand and applicant status. This insight is particularly important for planning and implementing policies aimed at reducing waiting times and improving the responsiveness of housing services to better meet the needs of those on the waiting list.
+The distance between the red and blue dots suggests a discrepancy between the number of people seeking housing and those who leave the system without being housed. This gap may highlight inefficiencies or barriers within the social housing system that result in applicants dropping out or being removed from the list. The stability in the number of active applications suggests a persistent need for social housing, while the presence of inactive or canceled applications could point to potential improvements in the system to better retain and service applicants.
+
+From a policy perspective, this graph calls attention to the potential for improving the housing allocation process to decrease the number of inactive/canceled applications and better meet the housing needs represented by the consistently high active waiting list. It could also indicate the need to examine the reasons behind the cancellations and inactivity, as addressing these could lead to higher efficiency within the social housing system and increased satisfaction among applicants.
 
 
 # Discussion

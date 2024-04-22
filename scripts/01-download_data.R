@@ -1,26 +1,32 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Downloads and saves the data from Open Data Toronto
+# Author: Xiaoyu Miao
+# Date: April 17th
+# Contact: xy.miao@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
 
 
 #### Workspace setup ####
 library(opendatatoronto)
 library(tidyverse)
-# [...UPDATE THIS...]
+
 
 #### Download data ####
-# [...ADD CODE HERE TO DOWNLOAD...]
+#Access to GSS Data
+#Step 1: Visit the Open Data Toronto website
+#Visit the Open Data Toronto website: https://open.toronto.ca/
 
-
+#Step 2: Find relevant datasets
+#You can then use the search function on the website to search for wanted dataset and complete the data collection.
 
 #### Save data ####
-# [...UPDATE THIS...]
+
+#Step 4: Download the data
+#Once you have found the relevant dataset, you can start downloading it. Just select the formate you wanted and click the "download data" button.
+
+#Optional
 # change the_raw_data to whatever name you assigned when you downloaded it.
+
 write_csv(the_raw_data, "inputs/data/raw_data.csv") 
 
          
