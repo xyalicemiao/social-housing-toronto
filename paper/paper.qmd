@@ -31,17 +31,14 @@ Access to stable and affordable housing is a fundamental aspect of societal well
 By recognizing the unique needs of households with dependents and understanding the socio-economic drivers of housing disparities in Toronto, policymakers and housing providers can develop targeted interventions to promote housing equity and stability for vulnerable families in the city. Through evidence-based policy interventions and a deeper understanding of household composition in social housing, this paper aims to contribute to the ongoing discourse on housing affordability, access, and equity in Toronto, striving towards inclusive and sustainable housing solutions for all members of Toronto's diverse community.
 
 
-# Data {#sec-data}
-
-
-Data Sourcing
+# Data Sourcing
 
 This data is sourced from Open Data Toronto, a public platform that offers a wide array of datasets relevant to various aspects of urban life, including housing, transportation, public health, and more. This initiative allows researchers, policymakers, and the general public to access and utilize city-managed data in an effort to foster transparency, drive innovation, and facilitate informed decision-making. Utilizing such open data platforms ensures that the information is not only readily available but also consistently updated and maintained according to government standards. This approach helps in compiling comprehensive and reliable datasets that are crucial for conducting thorough analyses, like the study of housing application trends, thereby contributing to more effective urban planning and policy development.
 
 The data in this post was compiled using open source statistical programming language R @RCoreTeam. It uses functionalists such as janitor and ggplot2. Finally, the cleaned data is saved as a CSV file in the specified "analysis_data" directory. This allows access to the cleaned data set for further analysis or reporting. Using write.csv with line name = FALSE ensures the output file is neat.
 
 
-Data Cleaning
+#Data Cleaning
 
 To clean the data for better analysis processing, unnecessary columns such as how many bedrooms are in the social housing units and repetitive columns were removed. We use the function 'janitor' to achieve intended data cleaning.
 
@@ -98,7 +95,7 @@ plot_data <- data.frame(
 plot_data$quarter_year <- 
   factor(plot_data$quarter_year, levels = unique(plot_data$quarter_year))
 
-# Create a plot
+# Create a dot plot
 ggplot(plot_data, 
        aes(x = quarter_year)) +
   geom_point(aes(y = test), color = "red") +
@@ -137,7 +134,7 @@ seniors <- analysis_data$seniors
 # Create a data frame
 plot_data <- data.frame(
               quarter_year = year_quarter,
-              test = total_active_waiting_list,
+              test = test,
               seniors = seniors
             )
 
@@ -145,7 +142,7 @@ plot_data <- data.frame(
 plot_data$quarter_year <- 
   factor(plot_data$quarter_year, levels = unique(plot_data$quarter_year))
 
-# Create a plot
+# Create a dot plot
 ggplot(plot_data, aes(x = quarter_year)) +
   geom_point(aes(y = test), color = "red") +
   geom_point(aes(y = housed), color = "blue") +
@@ -173,32 +170,30 @@ Moreover, the fluctuating trends in both total active applications and seniors' 
 library(ggplot2)
 
 # Extract relevant columns with adjusted column names
-year_quarter <- analysis_data$Quarter_Year
-tes1 <- analysis_data$Household_no_dependents
-test2 <- analysis_data$Household_with_dependents
+year_quarter <- analysis_data$quarter_year
+test1 <- analysis_data$household_no_dependents
+test2 <- analysis_data$household_with_dependents
 
 # Create a data frame
 plot_data <- data.frame(Year_Quarter = year_quarter,
-                        test1 = household_no_dependents,
-                        test2 = household_with_dependents)
+                        test1 = test1,
+                        test2 = test2)
 
-# Convert Year_Quarter to factor to maintain order
-plot_data$Year_Quarter <- factor(plot_data$Year_Quarter, levels = unique(plot_data$Year_Quarter))
+
 
 # Create a line plot
 ggplot(plot_data, aes(x = Year_Quarter)) +
-  geom_point(aes(y = household_no_dependents, color = "red")) +
-  geom_point(aes(y = household_with_dependents, color = "blue")) +
+  geom_point(aes(y = test1, color = "red",group = 1)) +
+  geom_point(aes(y = test2, color = "blue",group = 2)) +
   scale_color_manual(values = c("blue", "red")) +
   labs(title = "Households with and without Dependents Applying for Social Housing",
        x = "Year Quarter",
        y = "Application Numbers") +
-  theme_minimal() +
-  theme(legend.title = element_blank())
+  theme_minimal()
 
 ```
 
-The line plot @figure4 comparing households with and without dependents applying for social housing from Q1 2019 to Q4 2023 provides valuable insights into the composition of applicants and potential variations in housing needs among different household types over time. From the graph, we observe fluctuations in both the number of households with and without dependents applying for social housing throughout the observed period. Interestingly, the number of households with dependents appears to fluctuate more prominently compared to households without dependents, as indicated by the greater variability in the dashed line representing households with dependents.
+The dot plot @figure4 comparing households with and without dependents applying for social housing from Q1 2019 to Q4 2023 provides valuable insights into the composition of applicants and potential variations in housing needs among different household types over time. From the graph, we observe fluctuations in both the number of households with and without dependents applying for social housing throughout the observed period. Interestingly, the number of households with dependents appears to fluctuate more prominently compared to households without dependents, as indicated by the greater variability in the dashed line representing households with dependents.
 
 This variation in the number of applications from households with dependents may reflect changes in family dynamics, economic conditions, or social factors affecting household composition and housing stability. For instance, economic downturns or changes in family circumstances could lead to fluctuations in the number of households with dependents seeking social housing support. Understanding these dynamics is crucial for policymakers and housing providers to tailor their programs and services effectively to meet the diverse needs of households with different compositions. It highlights the importance of considering family size, structure, and specific needs when designing housing assistance programs and allocating resources to address housing insecurity and promote housing stability for vulnerable populations.
 
@@ -240,7 +235,7 @@ total_active_waiting_list <- analysis_data$total_active_waiting_list
 plot_data$Inactive_Cancelled <- inactive_cancelled
 plot_data$Total_Active_Waiting_List <- total_active_waiting_list
 
-# Create a line plot
+# Create a dot plot
 ggplot(plot_data, aes(x = quarter_year)) +
   geom_point(aes(y = Inactive_Cancelled, color = "Inactive/Cancelled")) +
   geom_point(aes(y = Total_Active_Waiting_List, color = "Total Active Waiting List")) +
@@ -293,7 +288,6 @@ To enhance our understanding and analysis of the housing data, the next steps sh
 # Appendix {-}
 
 
-# Additional data details
 
 # Model details {#sec-model-details}
 
